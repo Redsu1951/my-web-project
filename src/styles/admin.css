@@ -1,0 +1,7 @@
+.text-purple { color: #6f42c1; }
+.btn-purple { background-color: #6f42c1; color: white; border-color: #6f42c1; }
+.btn-purple:hover { background-color: #5a32a3; border-color: #5a32a3; }
+.btn-outline-purple { color: #6f42c1; border-color: #6f42c1; }
+.btn-outline-purple:hover { background-color: #6f42c1; color: white; border-color: #6f42c1; }
+.table-purple thead { background-color: #d9c8f7 !important; }
+.card.border-purple { border-color: #6f42c1; }
