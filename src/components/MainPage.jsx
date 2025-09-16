@@ -1,66 +1,67 @@
 // src/components/MainPage.jsx
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from 'react-router-dom'; // SPA navigation
+import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import RestaurantCard from "./RestaurantCard";
 
 const MainPage = () => {
+  const [search, setSearch] = useState("");
+
+  const restaurants = [
+    { id: 1, name: "Pizza Palace", address: "123 Main St", image: "/images/pizza.jpg" },
+    { id: 2, name: "Burger Hub", address: "456 Market St", image: "/images/burger.jpg" },
+    { id: 3, name: "Sushi World", address: "789 Ocean Ave", image: "/images/sushi.jpg" },
+    { id: 4, name: "Taco Town", address: "321 Elm St", image: "/images/taco.jpg" },
+  ];
+
+  const filteredRestaurants = restaurants.filter((res) =>
+    res.name.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
-    <div className="container vh-100 d-flex justify-content-center align-items-center">
-      <div className="row text-center w-100">
-        <h1 className="mb-5">Welcome to FrontDash</h1>
+    <div
+      className="main-page-container"
+      style={{
+        backgroundImage: "url('/food-bg.jpg')",
+        backgroundSize: "cover",
+        minHeight: "100vh",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      {/* Top bar with login */}
+      <div className="d-flex justify-content-end align-items-center p-3">
+        <button className="btn btn-primary">Login</button>
+      </div>
 
-        {/* Restaurant */}
-        <div className="col-md-4 mb-4">
-          <div className="card shadow-sm h-100">
-            <div className="card-body d-flex flex-column justify-content-center">
-              <h3 className="card-title mb-3">Restaurant</h3>
-              <p className="card-text">Manage your menu, hours, and orders.</p>
-              <div className="d-flex justify-content-around mt-auto">
-                <Link to="/restaurant-dashboard" className="btn btn-primary">
-                  Login
-                </Link>
-                <Link to="/restaurant-register" className="btn btn-outline-primary">
-                  Register
-                </Link>
-              </div>
+      {/* Logo normal size, centered */}
+      <div className="text-center my-4">
+        <img
+          src="/images/logo.png"
+          alt="Logo"
+          style={{ height: "100px" }} // normal height
+        />
+      </div>
+
+      {/* Search Bar */}
+      <div className="text-center mb-4">
+        <input
+          type="text"
+          placeholder="Search restaurants..."
+          className="form-control w-50 mx-auto"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
+
+      {/* Restaurant Grid */}
+      <div className="container">
+        <div className="row">
+          {filteredRestaurants.map((restaurant) => (
+            <div className="col-md-3 mb-4" key={restaurant.id}>
+              <RestaurantCard restaurant={restaurant} />
             </div>
-          </div>
+          ))}
         </div>
-
-        {/* Admin */}
-        <div className="col-md-4 mb-4">
-          <div className="card shadow-sm h-100">
-            <div className="card-body d-flex flex-column justify-content-center">
-              <h3 className="card-title mb-3">Admin</h3>
-              <p className="card-text">Approve restaurants, manage staff and drivers.</p>
-              <div className="d-flex justify-content-around mt-auto">
-                <Link to="/admin-dashboard" className="btn btn-success">
-                  Login
-                </Link>
-                {/* Usually admin register is handled internally */}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Customer */}
-        <div className="col-md-4 mb-4">
-          <div className="card shadow-sm h-100">
-            <div className="card-body d-flex flex-column justify-content-center">
-              <h3 className="card-title mb-3">Customer</h3>
-              <p className="card-text">Order food from your favorite restaurants.</p>
-              <div className="d-flex justify-content-around mt-auto">
-                <Link to="/customer-login" className="btn btn-warning">
-                  Login
-                </Link>
-                <Link to="/customer-register" className="btn btn-outline-warning">
-                  Register
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   );

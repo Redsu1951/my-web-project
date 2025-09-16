@@ -6,6 +6,21 @@
   box-shadow: 0 10px 20px rgba(0,0,0,0.2);
   transition: all 0.3s ease;
 }
+/* in customer.css */
+.cart-container {
+  position: fixed;
+  top: 120px; /* adjust based on top margin */
+  right: 20px;
+  width: 250px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  z-index: 100;
+}
+
 
 /* Button hover transition */
 .btn-warning {
